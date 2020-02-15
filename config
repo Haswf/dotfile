@@ -74,7 +74,7 @@ bindsym $mod+Shift+Print --release exec --no-startup-id i3-scrot -s
 bindsym $mod+Shift+h exec xdg-open /usr/share/doc/manjaro/i3_help.pdf
 bindsym $mod+Ctrl+x --release exec --no-startup-id xkill
 
-# focus_follows_mouse no
+# focus_follows_mouse yes
 
 # change focus
 bindsym $mod+j focus left
@@ -235,7 +235,7 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 bindsym $mod+0 mode "$mode_system"
 set $mode_system (l)ock, (e)xit, switch_(u)ser, (s)uspend, (h)ibernate, (r)eboot, (Shift+s)hutdown
 mode "$mode_system" {
-    bindsym l exec --no-startup-id i3exit lock, mode "default"
+    bindsym l exec --no-startup-id i3lock-fancy, mode "default"
     bindsym s exec --no-startup-id i3exit suspend, mode "default"
     bindsym u exec --no-startup-id i3exit switch_user, mode "default"
     bindsym e exec --no-startup-id i3exit logout, mode "default"
@@ -283,17 +283,32 @@ exec --no-startup-id nm-applet
 exec --no-startup-id xfce4-power-manager
 exec --no-startup-id pamac-tray
 exec --no-startup-id clipit
-# Set resolution to 2560 * 1440 
-exec xrandr --output eDP1 --mode 2560x1440
+
+# Set resolution to 1920x1080
+# exec_always --no-startup-id xrandr --output eDP1 --mode 1920x1080
+
+# Set resolution to 2560x1440
+exec_always --no-startup-id xrandr --output eDP1 --mode 2560x1440
+
+# exec_always --no-startup-id tlp
 # Change wallpaper
-exec ~/scripts/wallpaper.sh
+exec_always --no-startup-id variety
+
+exec_always --no-startup-id mate-power-manager
+
 # Start fcitx
-exec fcitx
+exec_always --no-startup-id fcitx
+
+# Start application launcher
+exec_always --no-startup-id albert
+
+#
+
 # exec --no-startup-id blueman-applet
 # exec_always --no-startup-id sbxkb
 exec --no-startup-id start_conky_maia
 # exec --no-startup-id start_conky_green
-exec --no-startup-id xautolock -time 10 -locker blurlock
+exec --no-startup-id xautolock -time 10 -locker i3lock-fancy
 exec_always --no-startup-id ff-theme-util
 exec_always --no-startup-id fix_xcursor
 
@@ -330,18 +345,18 @@ set_from_resource $term_color15    color15
 
 # Start i3bar to display a workspace bar (plus the system information i3status if available)
 bar {
-	i3bar_command i3bar
-	status_command i3status
-	position bottom
+    i3bar_command i3bar
+    status_command i3status
+    position bottom
 
 ## please set your primary output first. Example: 'xrandr --output eDP1 --primary'
-#	tray_output primary
-#	tray_output eDP1
+#   tray_output primary
+#   tray_output eDP1
 
-	bindsym button4 nop
-	bindsym button5 nop
+    bindsym button4 nop
+    bindsym button5 nop
 #   font xft:URWGothic-Book 11
-	strip_workspace_numbers yes
+    strip_workspace_numbers yes
 
     colors {
         background #222D31
@@ -427,5 +442,6 @@ mode "$mode_gaps_outer" {
         bindsym Escape mode "default"
 }
 
-############### Monitor ###############
-exec --no-startup-id xrandr --output DP1 --right-of eDP1 --auto --mode 2560x1440
+############### Monitor ################
+# exec_always --no-startup-id xrandr --output DP1 --right-of eDP1 --auto --mode 2560x1440
+
