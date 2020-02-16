@@ -2,7 +2,8 @@ import os
 import tempfile
 
 dir_path = os.path.dirname(os.path.realpath(__file__))
-home = "/home/haswell"
+username = os.getlogin()
+home = os.path.expanduser("~")
 
 linkmap = {
 	"jmeter.properties":"/opt/jmeter/bin/",
@@ -44,5 +45,5 @@ if __name__ == "__main__":
 		src = os.path.join(dir_path, file)
 		dest = os.path.join(linkmap[file], file)
 		symlink_force(src, dest)
-	print("Symbolic link for",file,"created ")
+		print("Symbolic link for",file,"created ")
 
