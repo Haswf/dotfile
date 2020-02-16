@@ -12,7 +12,8 @@ linkmap = {
 	".Xresources":home,
 	".xprofile":home,
 	".xinitrc":home,
-	".gitconfig":home
+	".gitconfig":home,
+	"pacman.conf":"/etc/"
 }
 
 

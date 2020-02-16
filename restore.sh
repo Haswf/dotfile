@@ -1,0 +1,1 @@
+sudo yay -S $(cat list.txt) 
